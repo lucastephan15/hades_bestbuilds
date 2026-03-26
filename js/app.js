@@ -219,41 +219,41 @@ function renderCard(build) {
     const desc = currentLang === 'en' ? (boon.desc_en || boon.desc) : boon.desc;
     const name = currentLang === 'en' ? boon.boon_name : (boon.boon_name_pt || boon.boon_name);
     const slot = t['slot_' + boon.slot] || boon.slot;
-    return \`
-    <div class="boon-chip boon-god-\${boon.god} \${desc ? 'tooltip' : ''}" data-tooltip="\${desc || name}">
-      <img src="\${ASSETS}/boons/\${boon.god}/\${boon.icon}" alt="\${name}" loading="lazy">
+    return `
+    <div class="boon-chip boon-god-${boon.god} ${desc ? 'tooltip' : ''}" data-tooltip="${desc || name}">
+      <img src="${ASSETS}/boons/${boon.god}/${boon.icon}" alt="${name}" loading="lazy">
       <div class="boon-chip-text">
-        <span class="boon-chip-name">\${name}</span>
-        <span class="boon-chip-slot">\${slot}</span>
+        <span class="boon-chip-name">${name}</span>
+        <span class="boon-chip-slot">${slot}</span>
       </div>
     </div>
-  \`}).join('');
+  `}).join('');
 
-  const godPortraits = build.gods_involved.map(god => \`
-    <div class="tooltip" data-tooltip="\${GOD_NAMES[god]}" style="display:inline-block; border-radius:50%;">
-      <img class="god-portrait-mini" src="\${ASSETS}/boons/\${god}/\${god}_portrait.png" alt="\${GOD_NAMES[god]}" loading="lazy">
+  const godPortraits = build.gods_involved.map(god => `
+    <div class="tooltip" data-tooltip="${GOD_NAMES[god]}" style="display:inline-block; border-radius:50%;">
+      <img class="god-portrait-mini" src="${ASSETS}/boons/${god}/${god}_portrait.png" alt="${GOD_NAMES[god]}" loading="lazy">
     </div>
-  \`).join('');
+  `).join('');
 
-  const duoHTML = build.duo_boons.length ? build.duo_boons.map(d => \`<span class="tag tag-tier-S">Duo: \${d}</span>\`).join('') : '';
-  const legHTML = build.legendary_boons.map(l => \`<span class="tag tag-tier-S">Leg: \${l}</span>\`).join('');
-  const legendaryHTML = (duoHTML || legHTML) ? \`<div style="margin-bottom: 0.8rem">\${duoHTML} \${legHTML}</div>\` : '';
+  const duoHTML = build.duo_boons.length ? build.duo_boons.map(d => `<span class="tag tag-tier-S">Duo: ${d}</span>`).join('') : '';
+  const legHTML = build.legendary_boons.map(l => `<span class="tag tag-tier-S">Leg: ${l}</span>`).join('');
+  const legendaryHTML = (duoHTML || legHTML) ? `<div style="margin-bottom: 0.8rem">${duoHTML} ${legHTML}</div>` : '';
 
-  const mirrorTalentsHTML = build.mirror_talents ? \`
+  const mirrorTalentsHTML = build.mirror_talents ? `
     <div class="detail-section">
-      <h4>\${t.lbl_mirror}</h4>
+      <h4>${t.lbl_mirror}</h4>
       <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-        \${build.mirror_talents.map(tal => \`<span class="tag" style="background: rgba(138, 43, 226, 0.15); border-color: rgba(138, 43, 226, 0.3); color: #d8b4fe;">\${tal}</span>\`).join('')}
+        ${build.mirror_talents.map(tal => `<span class="tag" style="background: rgba(138, 43, 226, 0.15); border-color: rgba(138, 43, 226, 0.3); color: #d8b4fe;">${tal}</span>`).join('')}
       </div>
-    </div>\` : '';
+    </div>` : '';
 
-  const keepsakeHTML = build.keepsakes ? \`
+  const keepsakeHTML = build.keepsakes ? `
     <div class="detail-section" style="border-bottom: none; padding-bottom: 0;">
       <div style="display: flex; gap: 0.5rem; align-items: center;">
-        \${build.keepsake_icons ? build.keepsake_icons.map(k => \`<img src="\${ASSETS}/keepsakes/\${k}" style="width: 24px; height: 24px;">\`).join('') : ''}
-        <span style="font-size: 0.8rem; color: var(--text-muted);">\${build.keepsakes.join(' ➔ ')}</span>
+        ${build.keepsake_icons ? build.keepsake_icons.map(k => `<img src="${ASSETS}/keepsakes/${k}" style="width: 24px; height: 24px;">`).join('') : ''}
+        <span style="font-size: 0.8rem; color: var(--text-muted);">${build.keepsakes.join(' ➔ ')}</span>
       </div>
-    </div>\` : '';
+    </div>` : '';
 
   let mathHTML = '';
   let bossRowHTML = '';
@@ -263,97 +263,97 @@ function renderCard(build) {
     const mCombo = currentLang === 'en' ? (build.math.combo_name_en || build.math.combo_name) : build.math.combo_name;
     const mExp = currentLang === 'en' ? (build.math.explanation_en || build.math.explanation) : build.math.explanation;
     
-    mathHTML = \`
+    mathHTML = `
       <div class="math-stats-row">
-        <div class="math-stat tooltip" data-tooltip="\${t.tooltip_dps(mCombo, mExp)}">
-          <span class="math-value">⚔️ \${stats.dps}</span>
-          <span class="math-label">\${t.lbl_dps}</span>
+        <div class="math-stat tooltip" data-tooltip="${t.tooltip_dps(mCombo, mExp)}">
+          <span class="math-value">⚔️ ${stats.dps}</span>
+          <span class="math-label">${t.lbl_dps}</span>
         </div>
-        <div class="math-stat tooltip" data-tooltip="\${t.tooltip_burst(build.math.hits_per_combo)}">
-          <span class="math-value">💥 \${stats.avgCombo}</span>
-          <span class="math-label">\${t.lbl_burst}</span>
+        <div class="math-stat tooltip" data-tooltip="${t.tooltip_burst(build.math.hits_per_combo)}">
+          <span class="math-value">💥 ${stats.avgCombo}</span>
+          <span class="math-label">${t.lbl_burst}</span>
         </div>
-        <div class="math-stat tooltip" data-tooltip="\${t.tooltip_ttk}">
-          <span class="math-value">⏱️ \${stats.ttk}s</span>
-          <span class="math-label">\${t.lbl_ttk_max}</span>
+        <div class="math-stat tooltip" data-tooltip="${t.tooltip_ttk}">
+          <span class="math-value">⏱️ ${stats.ttk}s</span>
+          <span class="math-label">${t.lbl_ttk_max}</span>
         </div>
       </div>
-    \`;
+    `;
     
-    bossRowHTML = \`
+    bossRowHTML = `
       <div class="detail-section">
-        <h4>\${t.lbl_ttk_title}</h4>
+        <h4>${t.lbl_ttk_title}</h4>
         <div class="boss-ttk-row">
-          <div class="boss-ttk-item tooltip" data-tooltip="\${t.tooltip_furies}">
-            <img src="\${ASSETS}/bosses/furies.png" onerror="this.src='\${ASSETS}/keepsakes/Skull_Earring.png'">
-            <span>\${stats.bossTTK.furies}s</span>
+          <div class="boss-ttk-item tooltip" data-tooltip="${t.tooltip_furies}">
+            <img src="${ASSETS}/bosses/furies.png" onerror="this.src='${ASSETS}/keepsakes/Skull_Earring.png'">
+            <span>${stats.bossTTK.furies}s</span>
           </div>
-          <div class="boss-ttk-item tooltip" data-tooltip="\${t.tooltip_hydra}">
-            <img src="\${ASSETS}/bosses/hydra.png" onerror="this.src='\${ASSETS}/keepsakes/Bone_Hourglass.png'">
-            <span>\${stats.bossTTK.hydra}s</span>
+          <div class="boss-ttk-item tooltip" data-tooltip="${t.tooltip_hydra}">
+            <img src="${ASSETS}/bosses/hydra.png" onerror="this.src='${ASSETS}/keepsakes/Bone_Hourglass.png'">
+            <span>${stats.bossTTK.hydra}s</span>
           </div>
-          <div class="boss-ttk-item tooltip" data-tooltip="\${t.tooltip_theseus}">
-            <img src="\${ASSETS}/bosses/theseus.png" onerror="this.src='\${ASSETS}/keepsakes/Broken_Spearpoint.png'">
-            <span>\${stats.bossTTK.theseus}s</span>
+          <div class="boss-ttk-item tooltip" data-tooltip="${t.tooltip_theseus}">
+            <img src="${ASSETS}/bosses/theseus.png" onerror="this.src='${ASSETS}/keepsakes/Broken_Spearpoint.png'">
+            <span>${stats.bossTTK.theseus}s</span>
           </div>
-          <div class="boss-ttk-item tooltip" data-tooltip="\${t.tooltip_asterius}">
-            <img src="\${ASSETS}/bosses/asterius.png" onerror="this.src='\${ASSETS}/keepsakes/Cosmic_Egg.png'">
-            <span>\${stats.bossTTK.asterius}s</span>
+          <div class="boss-ttk-item tooltip" data-tooltip="${t.tooltip_asterius}">
+            <img src="${ASSETS}/bosses/asterius.png" onerror="this.src='${ASSETS}/keepsakes/Cosmic_Egg.png'">
+            <span>${stats.bossTTK.asterius}s</span>
           </div>
-          <div class="boss-ttk-item tooltip" data-tooltip="\${t.tooltip_hades}">
-            <img src="\${ASSETS}/bosses/hades.png" onerror="this.src='\${ASSETS}/keepsakes/Sigil_of_the_Dead.png'">
-            <span>\${stats.bossTTK.hades}s</span>
+          <div class="boss-ttk-item tooltip" data-tooltip="${t.tooltip_hades}">
+            <img src="${ASSETS}/bosses/hades.png" onerror="this.src='${ASSETS}/keepsakes/Sigil_of_the_Dead.png'">
+            <span>${stats.bossTTK.hades}s</span>
           </div>
         </div>
       </div>
-    \`;
+    `;
   }
 
   const notes = currentLang === 'en' ? (build.playstyle_notes_en || build.playstyle_notes) : build.playstyle_notes;
   const synergy = currentLang === 'en' ? (build.synergy_explanation_en || build.synergy_explanation) : build.synergy_explanation;
 
-  return \`
-    <div class="build-card" data-id="\${build.id}">
+  return `
+    <div class="build-card" data-id="${build.id}">
       <div class="card-header">
         <div class="build-title-row">
-          <h3 class="build-name">\${bName}</h3>
-          <span class="tier-badge tier-\${build.tier.charAt(0)}">TIER \${build.tier}</span>
+          <h3 class="build-name">${bName}</h3>
+          <span class="tier-badge tier-${build.tier.charAt(0)}">TIER ${build.tier}</span>
         </div>
         <div class="weapon-info">
-          <img src="\${ASSETS}/weapons/\${build.weapon_icon}" alt="\${build.weapon}" class="weapon-icon" loading="lazy">
-          <span>\${build.weapon} <span class="aspect-name">· \${build.aspect}</span></span>
+          <img src="${ASSETS}/weapons/${build.weapon_icon}" alt="${build.weapon}" class="weapon-icon" loading="lazy">
+          <span>${build.weapon} <span class="aspect-name">· ${build.aspect}</span></span>
         </div>
       </div>
 
       <div class="card-tags">
-        <span class="tag tag-difficulty-\${build.difficulty}">\${diffLabel}</span>
-        \${build.heat_level ? \`<span class="tag tag-heat">Heat \${build.heat_level}</span>\` : ''}
+        <span class="tag tag-difficulty-${build.difficulty}">${diffLabel}</span>
+        ${build.heat_level ? `<span class="tag tag-heat">Heat ${build.heat_level}</span>` : ''}
       </div>
       
-      \${mathHTML}
+      ${mathHTML}
 
-      <div class="boons-row">\${boonChips}</div>
-      <div class="gods-row">\${godPortraits}</div>
+      <div class="boons-row">${boonChips}</div>
+      <div class="gods-row">${godPortraits}</div>
 
       <!-- Detail Expansion -->
       <div class="card-details">
         <div class="detail-section">
-          <h4>\${t.lbl_howtoplay}</h4>
-          <p>\${notes}</p>
+          <h4>${t.lbl_howtoplay}</h4>
+          <p>${notes}</p>
         </div>
         
         <div class="detail-section">
-          <h4>\${t.lbl_synergy}</h4>
-          <p>\${synergy}</p>
+          <h4>${t.lbl_synergy}</h4>
+          <p>${synergy}</p>
         </div>
 
-        \${legendaryHTML}
-        \${mirrorTalentsHTML}
-        \${keepsakeHTML}
-        \${bossRowHTML}
+        ${legendaryHTML}
+        ${mirrorTalentsHTML}
+        ${keepsakeHTML}
+        ${bossRowHTML}
       </div>
     </div>
-  \`;
+  `;
 }
 
 function setupCards() {
