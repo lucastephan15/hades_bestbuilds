@@ -9,10 +9,16 @@ I was trying to clear a run a bit more efficiently one morning, but I realized t
 
 I decided to take a morning to code this project. The goal was simple: gather all the proven meta builds (from the community and speedrunners) into a single, clean, and easily accessible interface so anyone can plan their runs without opening ten different tabs.
 
+![UI Preview](assets/images/ui/preview_1.png)
+
 ## 🚀 Features
 - **Zero Installation:** This is a fully static, offline-ready webpage (Vanilla HTML/CSS/JS). Just download it and double-click `index.html` to run it. No local servers or installations required.
 - **Filter System:** Quickly sort setups by Weapon, Strength Tier, or Difficulty.
 - **Interactive Tooltips:** Hover over Boons, God portraits, and tags to read exactly what each skill does directly from the game's descriptions, along with quick synergy tips on why they were chosen.
+
+![UI Preview](assets/images/ui/preview_2.png)
+
+![UI Preview](assets/images/ui/preview_3.png)
 
 ## 🕹️ How to Use
 
