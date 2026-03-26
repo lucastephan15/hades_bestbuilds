@@ -74,13 +74,21 @@ function calculateDamage(math) {
   const dps = avgCombo * math.combos_per_sec;
   // HADES_HP comes from data.js
   const ttk = HADES_HP / dps;
+  const bossTTK = {
+    furies: (4400 / dps).toFixed(1),
+    hydra: (9500 / dps).toFixed(1),
+    theseus: (9000 / dps).toFixed(1),
+    asterius: (14000 / dps).toFixed(1),
+    hades: ttk.toFixed(1)
+  };
   
   return {
     normalHit: normalHit.toFixed(0),
     avgHit: avgHit.toFixed(0),
     avgCombo: avgCombo.toFixed(0),
     dps: dps.toFixed(0),
-    ttk: ttk.toFixed(1)
+    ttk: ttk.toFixed(1),
+    bossTTK
   };
 }
 
@@ -327,6 +335,39 @@ function renderCard(build) {
         ${legendaryHTML}
         ${mirrorTalentsHTML}
         ${keepsakeHTML}
+        
+        ${(() => {
+          if (!build.math) return '';
+          const stats = calculateDamage(build.math);
+          return `
+          <div class="detail-section">
+            <h4>TTK Base Mínimo (Chefões)</h4>
+            <div class="boss-ttk-row">
+              <div class="boss-ttk-item tooltip" data-tooltip="Fúrias (Meg/Alecto/Tis)&#10;4.400 HP">
+                <img src="${ASSETS}/bosses/furies.png" alt="Fúrias" onerror="this.src='${ASSETS}/keepsakes/Skull_Earring.png'">
+                <span>${stats.bossTTK.furies}s</span>
+              </div>
+              <div class="boss-ttk-item tooltip" data-tooltip="Hidra de Ossos&#10;9.500 HP (Sem imunidades)">
+                <img src="${ASSETS}/bosses/hydra.png" alt="Hidra" onerror="this.src='${ASSETS}/keepsakes/Bone_Hourglass.png'">
+                <span>${stats.bossTTK.hydra}s</span>
+              </div>
+              <div class="boss-ttk-item tooltip" data-tooltip="Teseu&#10;9.000 HP">
+                <img src="${ASSETS}/bosses/theseus.png" alt="Teseu" onerror="this.src='${ASSETS}/keepsakes/Broken_Spearpoint.png'">
+                <span>${stats.bossTTK.theseus}s</span>
+              </div>
+              <div class="boss-ttk-item tooltip" data-tooltip="Astérios&#10;14.000 HP">
+                <img src="${ASSETS}/bosses/asterius.png" alt="Astérios" onerror="this.src='${ASSETS}/keepsakes/Cosmic_Egg.png'">
+                <span>${stats.bossTTK.asterius}s</span>
+              </div>
+              <div class="boss-ttk-item tooltip" data-tooltip="Hades&#10;34.000 HP (Fases 1 e 2)">
+                <img src="${ASSETS}/bosses/hades.png" alt="Hades" onerror="this.src='${ASSETS}/keepsakes/Sigil_of_the_Dead.png'">
+                <span>${stats.bossTTK.hades}s</span>
+              </div>
+            </div>
+          </div>
+          `;
+        })()}
+
       </div>
     </div>
   `;
