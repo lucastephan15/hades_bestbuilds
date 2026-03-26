@@ -4,22 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hades Build Guide | As Melhores Composições</title>
-  <meta name="description" content="Guia interativo das melhores builds, duos e lendárias para Hades. Saiba os combos mais letais do submundo.">
+  <meta name="description" content="Guia interativo das melhores builds e combos mortais de Hades.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="lang-flags">
+    <span onclick="setLanguage('pt')" class="flag-icon active-lang" id="flag-pt">🇧🇷</span>
+    <span onclick="setLanguage('en')" class="flag-icon" id="flag-en">🇺🇸</span>
+  </div>
+
   <!-- HERO SECTION -->
   <header class="hero">
     <!-- Fallback if Zagreus image is missing -->
     <img src="assets/images/ui/Zagreus.png" alt="Hades Logo" class="hero-logo" onerror="this.src='assets/images/ui/Zeus_symbol.png'">
-    <h1>Hades Build Guide</h1>
-    <p class="subtitle">O Compêndio das Melhores Composições</p>
-    <p class="description">Descubra as sinergias mais poderosas (duos, lendárias e combos) para dominar o submundo com todas as armas e aspectos. Siga as orientações para se tornar imbatível.</p>
+    <h1 data-i18n="heroTitle">Hades Build Guide</h1>
+    <p class="subtitle" data-i18n="heroSubtitle">O Compêndio das Melhores Composições</p>
+    <p class="description" data-i18n="heroDesc">Descubra as sinergias mais poderosas (duos, lendárias e combos) para dominar o submundo com todas as armas e aspectos. Siga as orientações para se tornar imbatível.</p>
     <div class="hero-divider"></div>
     <div class="stats-bar">
       <div class="stat">
         <div class="stat-number" id="stat-builds">0</div>
-        <div class="stat-label">Builds</div>
+        <div class="stat-label" data-i18n="statBuilds">Builds</div>
       </div>
       <div class="stat">
         <div class="stat-number" id="stat-s-tier">0</div>
@@ -27,7 +32,7 @@
       </div>
       <div class="stat">
         <div class="stat-number" id="stat-weapons">0</div>
-        <div class="stat-label">Armas</div>
+        <div class="stat-label" data-i18n="statWeapons">Armas</div>
       </div>
     </div>
   </header>
@@ -36,21 +41,21 @@
   <section class="filters-section">
     <div class="filters-container">
       <div class="filter-group">
-        <div class="filter-group-label">Arma</div>
-        <button class="filter-btn active" data-group="weapon" data-value="all">Todas</button>
-        <button class="filter-btn" data-group="weapon" data-value="blade">Espada</button>
-        <button class="filter-btn" data-group="weapon" data-value="spear">Lança</button>
-        <button class="filter-btn" data-group="weapon" data-value="shield">Escudo</button>
-        <button class="filter-btn" data-group="weapon" data-value="bow">Arco</button>
-        <button class="filter-btn" data-group="weapon" data-value="fists">Luvas</button>
-        <button class="filter-btn" data-group="weapon" data-value="rail">Canhão</button>
+        <div class="filter-group-label" data-i18n="filterWeapon">Arma</div>
+        <button class="filter-btn active" data-group="weapon" data-value="all" data-i18n="filterAllW">Todas</button>
+        <button class="filter-btn" data-group="weapon" data-value="blade" data-i18n="weaponBlade">Espada</button>
+        <button class="filter-btn" data-group="weapon" data-value="spear" data-i18n="weaponSpear">Lança</button>
+        <button class="filter-btn" data-group="weapon" data-value="shield" data-i18n="weaponShield">Escudo</button>
+        <button class="filter-btn" data-group="weapon" data-value="bow" data-i18n="weaponBow">Arco</button>
+        <button class="filter-btn" data-group="weapon" data-value="fists" data-i18n="weaponFists">Luvas</button>
+        <button class="filter-btn" data-group="weapon" data-value="rail" data-i18n="weaponRail">Canhão</button>
       </div>
       
       <div class="filter-separator"></div>
       
       <div class="filter-group">
-        <div class="filter-group-label">Tier</div>
-        <button class="filter-btn active" data-group="tier" data-value="all">Todos</button>
+        <div class="filter-group-label" data-i18n="filterTier">Tier</div>
+        <button class="filter-btn active" data-group="tier" data-value="all" data-i18n="filterAllT">Todos</button>
         <button class="filter-btn" data-group="tier" data-value="S">Tier S</button>
         <button class="filter-btn" data-group="tier" data-value="A">Tier A</button>
         <button class="filter-btn" data-group="tier" data-value="B">Tier B</button>
@@ -60,18 +65,18 @@
       <div class="filter-separator"></div>
       
       <div class="filter-group">
-        <div class="filter-group-label">Dificuldade</div>
-        <button class="filter-btn active" data-group="difficulty" data-value="all">Todas</button>
-        <button class="filter-btn" data-group="difficulty" data-value="easy">Fácil</button>
-        <button class="filter-btn" data-group="difficulty" data-value="medium">Médio</button>
-        <button class="filter-btn" data-group="difficulty" data-value="hard">Difícil</button>
+        <div class="filter-group-label" data-i18n="filterDifficulty">Dificuldade</div>
+        <button class="filter-btn active" data-group="difficulty" data-value="all" data-i18n="filterAllD">Todas</button>
+        <button class="filter-btn" data-group="difficulty" data-value="easy" data-i18n="diffEasy">Fácil</button>
+        <button class="filter-btn" data-group="difficulty" data-value="medium" data-i18n="diffMed">Médio</button>
+        <button class="filter-btn" data-group="difficulty" data-value="hard" data-i18n="diffHard">Difícil</button>
       </div>
     </div>
   </section>
 
   <!-- BUILDS GRID -->
   <main class="builds-section">
-    <div class="builds-count" id="builds-count">Carregando builds...</div>
+    <div class="builds-count" id="builds-count" data-i18n="lbl_initial_loading">Carregando builds...</div>
     <div class="builds-grid" id="builds-grid">
       <!-- JS injeta os cartões aqui -->
     </div>
@@ -79,8 +84,8 @@
 
   <footer class="footer">
     <div class="footer-brand">HADES BUILD GUIDE</div>
-    <p>Projeto pessoal e interativo para explorar as melhores sinergias e cálculos do submundo.</p>
-    <p>Hades é uma marca registrada da Supergiant Games.</p>
+    <p data-i18n="footer1">Projeto pessoal e interativo para explorar as melhores sinergias e cálculos do submundo.</p>
+    <p data-i18n="footer2">Hades é uma marca registrada da Supergiant Games.</p>
   </footer>
 
   <script src="js/data.js"></script>
