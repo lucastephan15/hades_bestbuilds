@@ -4,7 +4,7 @@ A clean, interactive guide gathering the best synergies and builds for **Hades**
 
 ![UI Preview](assets/images/ui/Zagreus.png)
 
-## 🌟 The Origin Story
+## 🌟 Why bro 
 I was trying to clear a run a bit more efficiently one morning, but I realized that finding solid, tested build information was surprisingly frustrating. The details were scattered all over wikis, Reddit threads, and long YouTube videos.
 
 I decided to take a morning to code this project. The goal was simple: gather all the proven meta builds (from the community and speedrunners) into a single, clean, and easily accessible interface so anyone can plan their runs without opening ten different tabs.
