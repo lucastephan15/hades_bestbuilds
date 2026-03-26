@@ -312,16 +312,22 @@ function renderCard(build) {
   const notes = currentLang === 'en' ? (build.playstyle_notes_en || build.playstyle_notes) : build.playstyle_notes;
   const synergy = currentLang === 'en' ? (build.synergy_explanation_en || build.synergy_explanation) : build.synergy_explanation;
 
+  const weaponImg = build.weapon_icon
+    ? `<img src="${ASSETS}/weapons/${build.weapon_icon}" alt="${build.weapon}" class="weapon-icon" loading="lazy">`
+    : `<span style="font-size:1.5rem">⚔</span>`;
+
   return `
     <div class="build-card" data-id="${build.id}">
       <div class="card-header">
-        <div class="build-title-row">
-          <h3 class="build-name">${bName}</h3>
-          <span class="tier-badge tier-${build.tier.charAt(0)}">TIER ${build.tier}</span>
-        </div>
-        <div class="weapon-info">
-          <img src="${ASSETS}/weapons/${build.weapon_icon}" alt="${build.weapon}" class="weapon-icon" loading="lazy">
-          <span>${build.weapon} <span class="aspect-name">· ${build.aspect}</span></span>
+        <div class="weapon-icon-wrapper">${weaponImg}</div>
+        <div class="card-title-area">
+          <div class="card-title-row">
+            <span class="build-name">${bName}</span>
+            <span class="tier-badge tier-${build.tier.charAt(0)}">TIER ${build.tier}</span>
+          </div>
+          <div class="card-subtitle">
+            <span class="weapon-name">${build.weapon}</span> · <span class="aspect-name">${build.aspect}</span>
+          </div>
         </div>
       </div>
 
