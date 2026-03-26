@@ -64,6 +64,26 @@ const LEGENDARY_ICON_MAP = {
   'Divine Protection': 'athena/Deathless_Stand_I.png'
 };
 
+function calculateDamage(math) {
+  if (!math) return null;
+  const sumAdditives = math.additives.reduce((acc, curr) => acc + curr.value, 0);
+  const prodMultipliers = math.multipliers.reduce((acc, curr) => acc * curr.value, 1);
+  const normalHit = (math.base_damage * (1 + sumAdditives)) * prodMultipliers;
+  const avgHit = normalHit * (1 + (math.crit_chance * (math.crit_multiplier - 1)));
+  const avgCombo = avgHit * math.hits_per_combo;
+  const dps = avgCombo * math.combos_per_sec;
+  // HADES_HP comes from data.js
+  const ttk = HADES_HP / dps;
+  
+  return {
+    normalHit: normalHit.toFixed(0),
+    avgHit: avgHit.toFixed(0),
+    avgCombo: avgCombo.toFixed(0),
+    dps: dps.toFixed(0),
+    ttk: ttk.toFixed(1)
+  };
+}
+
 let builds = [];
 let activeFilters = {
   tier: 'all',
@@ -72,9 +92,8 @@ let activeFilters = {
   difficulty: 'all'
 };
 
-async function init() {
-  const resp = await fetch('data/builds.json');
-  builds = await resp.json();
+function init() {
+  builds = typeof BUILDS_DATA !== 'undefined' ? BUILDS_DATA : [];
   updateStats();
   renderBuilds();
   setupFilters();
@@ -172,7 +191,7 @@ function renderCard(build) {
     : `<span style="font-size:1.5rem">⚔</span>`;
 
   const boonChips = build.core_boons.map(boon => `
-    <div class="boon-chip boon-god-${boon.god}">
+    <div class="boon-chip boon-god-${boon.god} ${boon.desc ? 'tooltip' : ''}" data-tooltip="${boon.desc || boon.boon_name_pt}">
       <img src="${ASSETS}/boons/${boon.god}/${boon.icon}" alt="${boon.boon_name}" loading="lazy">
       <div class="boon-chip-text">
         <span class="boon-chip-name">${boon.boon_name_pt || boon.boon_name}</span>
@@ -182,8 +201,10 @@ function renderCard(build) {
   `).join('');
 
   const godPortraits = build.gods_involved.map(god => `
-    <img class="god-portrait-mini" src="${ASSETS}/boons/${god}/${god}_portrait.png"
-         alt="${GOD_NAMES[god]}" title="${GOD_NAMES[god]}" loading="lazy">
+    <div class="tooltip" data-tooltip="${GOD_NAMES[god]}" style="display:inline-block; border-radius:50%;">
+      <img class="god-portrait-mini" src="${ASSETS}/boons/${god}/${god}_portrait.png"
+           alt="${GOD_NAMES[god]}" loading="lazy">
+    </div>
   `).join('');
 
   // Duo boons
@@ -214,6 +235,22 @@ function renderCard(build) {
             const iconImg = icon ? `<img src="${ASSETS}/boons/${icon}" alt="${leg}">` : '';
             return `<div class="duo-badge legendary-badge">${iconImg}${leg}</div>`;
           }).join('')}
+        </div>
+      </div>`;
+  }
+
+  // Mirror Talents
+  let mirrorTalentsHTML = '';
+  if (build.mirror_talents && build.mirror_talents.length > 0) {
+    mirrorTalentsHTML = `
+      <div class="detail-section">
+        <h4>Espelho da Noite</h4>
+        <div class="detail-duos">
+          ${build.mirror_talents.map(talent => `
+            <div class="duo-badge" style="border-color: #8b1a2b; color: #e8e4df;">
+              <span style="font-size:1rem; margin-right:4px;">🔮</span> ${talent}
+            </div>
+          `).join('')}
         </div>
       </div>`;
   }
@@ -251,8 +288,28 @@ function renderCard(build) {
       <div class="card-tags">
         <span class="tag tag-difficulty-${build.difficulty}">${diffLabel[build.difficulty]}</span>
         ${build.heat_level ? `<span class="tag tag-heat">Heat ${build.heat_level}</span>` : ''}
-        <span class="tag tag-source">${build.source}</span>
       </div>
+
+      ${(() => {
+        if (!build.math) return '';
+        const stats = calculateDamage(build.math);
+        const tooltipText = `Fórmula: Média Crítica no Combo [${build.math.combo_name}]&#10;${build.math.explanation}`;
+        return `
+        <div class="math-stats-row">
+          <div class="math-stat tooltip" data-tooltip="${tooltipText}">
+            <span class="math-value">⚔️ ${stats.dps}</span>
+            <span class="math-label">DPS Estimado</span>
+          </div>
+          <div class="math-stat tooltip" data-tooltip="Dano médio de um ciclo cheio (${build.math.hits_per_combo} hits/projetéis)">
+            <span class="math-value">💥 ${stats.avgCombo}</span>
+            <span class="math-label">Max Hit / Burst</span>
+          </div>
+          <div class="math-stat tooltip" data-tooltip="Tempo estimado (segundos) para destruir 34.000 HP (Hades Total) sem considerar as imunidades dele">
+            <span class="math-value">⏱️ ${stats.ttk}s</span>
+            <span class="math-label">TTK</span>
+          </div>
+        </div>`;
+      })()}
 
       <div class="boons-row">${boonChips}</div>
       <div class="gods-row">${godPortraits}</div>
@@ -268,6 +325,7 @@ function renderCard(build) {
         </div>
         ${duoHTML}
         ${legendaryHTML}
+        ${mirrorTalentsHTML}
         ${keepsakeHTML}
       </div>
     </div>

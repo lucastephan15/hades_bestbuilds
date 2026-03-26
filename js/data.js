@@ -1,0 +1,222 @@
+const HADES_HP = 34000;
+
+const BUILDS_DATA = [
+  {
+    "id": "merciful-end-fists",
+    "build_name": "Merciful End Fists (O Triturador)",
+    "weapon": "Twin Fists of Malphon",
+    "weapon_icon": "twin_fists.png",
+    "aspect": "Aspect of Demeter / Zagreus",
+    "aspect_icon": "Demeter_Aspect.png",
+    "tier": "S",
+    "core_boons": [
+      { "god": "ares", "boon_name": "Curse of Agony", "boon_name_pt": "Curse of Agony", "slot": "attack", "icon": "Curse_of_Agony_I.png", "desc": "Seu Ataque inflige Perdição. (Perdição: Após um breve atraso, a vítima recebe uma explosão de dano)." },
+      { "god": "athena", "boon_name": "Divine Flourish", "boon_name_pt": "Divine Flourish", "slot": "special", "icon": "Divine_Flourish_I.png", "desc": "Seu Especial é mais forte e pode Refletir. (Refletir: Devolve projéteis e golpes inimigos no momento exato do acerto)." },
+      { "god": "athena", "boon_name": "Divine Dash", "boon_name_pt": "Divine Dash", "slot": "dash", "icon": "Divine_Dash_I.png", "desc": "Sua Investida causa dano e pode Refletir." },
+      { "god": "ares", "boon_name": "Impending Doom", "boon_name_pt": "Impending Doom", "slot": "other", "icon": "Impending_Doom_I.png", "desc": "O dano do seu efeito Perdição é significativamente aumentado, mas leva +0,5 segundo para ser ativado." }
+    ],
+    "duo_boons": ["Merciful End"],
+    "legendary_boons": [],
+    "mirror_talents": ["Family Favorite"],
+    "keepsakes": ["Ares (Tártaro)", "Athena (Asfódelo)"],
+    "keepsake_icons": ["Blood_Filled_Vial.png", "Owl_Pendant.png"],
+    "heat_level": null,
+    "playstyle_notes": "Ataque para aplicar Doom e dê o dash imediatamente para detonar. Requer uma ordem específica: você PRECISA de Ares no ataque e Athena no especial para a Duo aparecer. Sem o Divine Dash, a build perde 70% da eficácia.",
+    "synergy_explanation": "O Merciful End faz com que efeitos de Reflexo (Athena) detonem o Doom instantaneamente. Como você está sempre dando dash para atacar, o dano é contínuo e ignora as janelas de defesa dos inimigos.",
+    "difficulty": "hard",
+    "source": "Lee Reamsnyder & Haelian",
+    "gods_involved": ["ares", "athena"],
+    "math": {
+      "base_damage": 200,
+      "additives": [{ "name": "Aditivos Espelho/Costas", "value": 1.0 }],
+      "multipliers": [],
+      "crit_chance": 0,
+      "crit_multiplier": 1,
+      "hits_per_combo": 1,
+      "combos_per_sec": 4.5,
+      "combo_name": "Detonação Doom",
+      "explanation": "Dano baseado na detonação do Doom ($200 base) mais adicionais, executando ~4.5 dash-strikes por segundo."
+    }
+  },
+  {
+    "id": "beowulf-mirage",
+    "build_name": "Beowulf Mirage Bug (O Maior Dano)",
+    "weapon": "Aegis",
+    "weapon_icon": "shield_of_chaos.png",
+    "aspect": "Aspect of Beowulf",
+    "aspect_icon": "Beowulf_Aspect.png",
+    "tier": "S",
+    "core_boons": [
+      { "god": "poseidon", "boon_name": "Flood Flare", "boon_name_pt": "Flood Flare", "slot": "cast", "icon": "Flood_Shot_I.png", "desc": "Sua Conjuração causa dano a inimigos ao seu redor e os empurra. (Nota: 'Flare/Sinal' é a versão exclusiva da conjuração para o Escudo de Beowulf, que detona no final da investida)." },
+      { "god": "artemis", "boon_name": "Deadly Strike", "boon_name_pt": "Deadly Strike", "slot": "other", "icon": "Deadly_Strike_I.png", "desc": "Seu Ataque é mais forte e tem +15% de chance de causar Dano Crítico. (Dica de UI: Faz sentido como passiva secundária se o escudo estiver focando no Cast)." },
+      { "god": "poseidon", "boon_name": "Splash Dash", "boon_name_pt": "Splash Dash", "slot": "dash", "icon": "Tidal_Dash_I.png", "desc": "Sua Investida causa dano aos inimigos próximos e os empurra." }
+    ],
+    "duo_boons": ["Mirage Shot"],
+    "legendary_boons": ["Breaking Wave"],
+    "mirror_talents": ["Stygian Soul"],
+    "keepsakes": ["Poseidon (Tártaro)", "Artemis (Asfódelo)"],
+    "keepsake_icons": ["Conch_Shell.png", "Adamant_Arrow.png"],
+    "heat_level": null,
+    "playstyle_notes": "Carregue o cast no escudo e use a investida. Foque em pegar o máximo de Poms de Poder no Flood Flare.",
+    "synergy_explanation": "No Aspecto de Beowulf, a Duo Mirage Shot está bugada: em vez de o segundo disparo dar 30% de dano, ele dá 100%. Isso dobra o dano base do seu Cast, que já é o mais alto do jogo com Poseidon.",
+    "difficulty": "medium",
+    "source": "Lee Reamsnyder",
+    "gods_involved": ["poseidon", "artemis"],
+    "math": {
+      "base_damage": 140,
+      "additives": [{ "name": "Poms / Sangue Fervente", "value": 0.75 }],
+      "multipliers": [
+        { "name": "Bônus Beowulf", "value": 2.0 },
+        { "name": "Mirage Bug", "value": 2.0 }
+      ],
+      "crit_chance": 0,
+      "crit_multiplier": 1,
+      "hits_per_combo": 4,
+      "combos_per_sec": 0.5,
+      "combo_name": "Barragem 4x Casts",
+      "explanation": "Carregar 4 pedras de Flood Flare. O Dano sofre multiplicação de x2.0 do Beowulf e x2.0 do Mirage Shot Bug para um burst colossal a cada 2 segs."
+    }
+  },
+  {
+    "id": "hestia-sniper",
+    "build_name": "Hestia One-Shot Sniper",
+    "weapon": "Exagryph",
+    "weapon_icon": "adamant_rail.png",
+    "aspect": "Aspect of Hestia",
+    "aspect_icon": "Hestia_Aspect.png",
+    "tier": "S",
+    "core_boons": [
+      { "god": "aphrodite", "boon_name": "Heartbreak Strike", "boon_name_pt": "Heartbreak Strike", "slot": "attack", "icon": "Heartbreak_Strike_I.png", "desc": "Seu Ataque é mais forte e inflige Fraqueza. (Fraqueza: O inimigo causa 30% a menos de dano por pelo menos 3 segundos)." },
+      { "god": "artemis", "boon_name": "Deadly Flourish", "boon_name_pt": "Deadly Flourish", "slot": "special", "icon": "Deadly_Flourish_I.png", "desc": "Seu Especial é mais forte e tem +20% de chance de causar Dano Crítico." },
+      { "god": "hermes", "boon_name": "Piercing Fire / Ricochet Fire", "boon_name_pt": "Martelo de Dédalo", "slot": "attack", "icon": "Swift_Strike_I.png", "desc": "Seu Ataque perfura os inimigos, atravessa bloqueios e causa +50% de dano contra Armaduras." }
+    ],
+    "duo_boons": ["Heart Rend"],
+    "legendary_boons": [],
+    "mirror_talents": ["Privileged Status"],
+    "keepsakes": ["Aphrodite / Artemis"],
+    "keepsake_icons": ["Eternal_Rose.png"],
+    "heat_level": null,
+    "playstyle_notes": "Atire, recarregue manualmente (reload) e atire de novo. O primeiro tiro após o reload é o que importa. Mantenha distância.",
+    "synergy_explanation": "Héstia dá um bônus fixo de dano enorme no primeiro tiro. Com o modificador de porcentagem de Afrodite (o mais alto do jogo) e críticos de Artemis via Heart Rend, cada bala pode tirar mais de 1500 de HP.",
+    "difficulty": "easy",
+    "source": "Lee Reamsnyder",
+    "gods_involved": ["aphrodite", "artemis"],
+    "math": {
+      "base_damage": 150,
+      "additives": [{ "name": "Afrodite / Espelho", "value": 1.5 }],
+      "multipliers": [],
+      "crit_chance": 0.10,
+      "crit_multiplier": 4.5,
+      "hits_per_combo": 1,
+      "combos_per_sec": 1.5,
+      "combo_name": "Precisão Oculta",
+      "explanation": "O tiro de Héstia recarrega manualmente. A magia acontece com o crítico Heart Rend de 4.5x somado à Afrodite."
+    }
+  },
+  {
+    "id": "cluster-rockets-eris",
+    "build_name": "Cluster Rockets Eris",
+    "weapon": "Exagryph",
+    "weapon_icon": "adamant_rail.png",
+    "aspect": "Aspect of Eris",
+    "aspect_icon": "Eris_Aspect.png",
+    "tier": "S",
+    "core_boons": [
+      { "god": "zeus", "boon_name": "Lightning Strike", "boon_name_pt": "Lightning Strike", "slot": "attack", "icon": "Lightning_Strike_I.png", "desc": "Seu Ataque dispara um relâmpago em cadeia que salta entre os inimigos atingidos." },
+      { "god": "artemis", "boon_name": "Deadly Flourish", "boon_name_pt": "Deadly Flourish", "slot": "special", "icon": "Deadly_Flourish_I.png", "desc": "Seu Especial é mais forte e tem +20% de chance de causar Dano Crítico." },
+      { "god": "hermes", "boon_name": "Cluster / Rocket Bomb", "boon_name_pt": "Martelo de Dédalo", "slot": "special", "icon": "Swift_Flourish_I.png", "desc": "Seu Especial dispara 5 foguetes frontais simultâneos em vez de um arco parabólico, mas cada projétil causa -30% de dano base. (A união da Bomba Dispersiva com a Bomba Foguete)." }
+    ],
+    "duo_boons": [],
+    "legendary_boons": ["Splitting Bolt"],
+    "mirror_talents": ["Family Favorite"],
+    "keepsakes": ["Zeus (Tártaro)"],
+    "keepsake_icons": ["Thunder_Signet.png"],
+    "heat_level": null,
+    "playstyle_notes": "Fique dentro da explosão do seu especial para ganhar +75% de dano global. Atire os foguetes à queima-roupa nos chefes.",
+    "synergy_explanation": "O combo de martelos Cluster + Rocket transforma seu especial em 5 foguetes frontais. Com o buff de 75% da Eris, esses foguetes causam um dos maiores bursts de dano do jogo.",
+    "difficulty": "medium",
+    "source": "Haelian",
+    "gods_involved": ["zeus", "artemis"],
+    "math": {
+      "base_damage": 56,
+      "additives": [{ "name": "Aditivos Base", "value": 1.3 }],
+      "multipliers": [{ "name": "Éris Buff", "value": 1.75 }],
+      "crit_chance": 0.20,
+      "crit_multiplier": 3.0,
+      "hits_per_combo": 5,
+      "combos_per_sec": 1.0,
+      "combo_name": "Salva 5x Mísseis",
+      "explanation": "5 foguetes multiplicados pelo buff global de Éris de 1.75x com % de Crítico por conta da Artemis."
+    }
+  },
+  {
+    "id": "achilles-hunting-blades",
+    "build_name": "Achilles Hunting Blades",
+    "weapon": "Varatha",
+    "weapon_icon": "eternal_spear.png",
+    "aspect": "Aspect of Achilles",
+    "aspect_icon": "Achilles_Aspect.png",
+    "tier": "S",
+    "core_boons": [
+      { "god": "ares", "boon_name": "Slicing Shot", "boon_name_pt": "Slicing Shot", "slot": "cast", "icon": "Slicing_Shot_I.png", "desc": "Sua Conjuração cria uma Fenda de Lâminas giratória que avança vagarosamente, causando dano contínuo." },
+      { "god": "artemis", "boon_name": "Deadly Strike", "boon_name_pt": "Deadly Strike", "slot": "attack", "icon": "Deadly_Strike_I.png", "desc": "Seu Ataque é mais forte e tem +15% de chance de causar Dano Crítico." }
+    ],
+    "duo_boons": ["Hunting Blades"],
+    "legendary_boons": ["Vicious Cycle"],
+    "mirror_talents": ["Infernal Soul"],
+    "keepsakes": ["Ares (Tártaro)", "Artemis (Asfódelo)"],
+    "keepsake_icons": ["Blood_Filled_Vial.png", "Adamant_Arrow.png"],
+    "heat_level": null,
+    "playstyle_notes": "Use o Especial da lança para avançar e ativar o buff de +150% de dano de cast. Solte os discos e corra enquanto eles perseguem o alvo.",
+    "synergy_explanation": "O buff do Aspecto de Achilles é um multiplicador pós-adição, o que faz os discos de Ares (já potencializados pela perseguição da Artemis) derreterem bosses enquanto você fica seguro.",
+    "difficulty": "easy",
+    "source": "Lee/Haelian",
+    "gods_involved": ["ares", "artemis"],
+    "math": {
+      "base_damage": 20,
+      "additives": [{ "name": "Bônus Aditivo", "value": 0.5 }],
+      "multipliers": [{ "name": "Buff Aquiles", "value": 2.5 }],
+      "crit_chance": 0,
+      "crit_multiplier": 1,
+      "hits_per_combo": 30,
+      "combos_per_sec": 1.0,
+      "combo_name": "Múltiplas Serras",
+      "explanation": "Cada tick de serra (~20) é impulsionado por 2.5x do Achilles. Considerando 3 serras gerando dezenas de hits por segundo."
+    }
+  },
+  {
+    "id": "100-dodge",
+    "build_name": "100% de Esquiva (Imortal)",
+    "weapon": "Twin Fists of Malphon",
+    "weapon_icon": "twin_fists.png",
+    "aspect": "Aspect of Zagreus",
+    "aspect_icon": null,
+    "tier": "A",
+    "core_boons": [
+      { "god": "zeus", "boon_name": "Lightning Strike", "boon_name_pt": "Lightning Strike", "slot": "attack", "icon": "Lightning_Strike_I.png", "desc": "Seu Ataque dispara um relâmpago em cadeia quando você atinge um inimigo." },
+      { "god": "hermes", "boon_name": "Greater Evasion", "boon_name_pt": "Greater Evasion", "slot": "other", "icon": "Greater_Evasion_I.png", "desc": "Você ganha uma chance extra passiva de Esquivar. (Faz os inimigos errarem o golpe em você completamente)." }
+    ],
+    "duo_boons": [],
+    "legendary_boons": [],
+    "mirror_talents": ["Ruthless Reflex"],
+    "keepsakes": ["Lambent Plume"],
+    "keepsake_icons": ["Lambent_Plume.png"],
+    "heat_level": null,
+    "playstyle_notes": "Termine as salas rápido para acumular a Pluma. Se o dash der 'Dodge', você ganha o buff de dano do espelho.",
+    "synergy_explanation": "Foca em sobrevivência total. O dano é menor que as builds S+, mas permite erros contra o Hades.",
+    "difficulty": "easy",
+    "source": "MaloneGames",
+    "gods_involved": ["zeus", "hermes"],
+    "math": {
+      "base_damage": 30,
+      "additives": [{ "name": "Aditivos Base", "value": 0.5 }],
+      "multipliers": [],
+      "crit_chance": 0,
+      "crit_multiplier": 1,
+      "hits_per_combo": 1,
+      "combos_per_sec": 5.0,
+      "combo_name": "Golpes Constantes",
+      "explanation": "Dano baseado na velocidade imensa da luva (15 arma + 15 raio) entregando ~5 ataques por segundo com baixa multiplicação."
+    }
+  }
+];

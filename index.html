@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hades Build Guide | As Melhores Composições</title>
+  <meta name="description" content="Guia interativo das melhores builds, duos e lendárias para Hades. Saiba os combos mais letais do submundo.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- HERO SECTION -->
+  <header class="hero">
+    <!-- Fallback if Zagreus image is missing -->
+    <img src="assets/images/ui/Zagreus.png" alt="Hades Logo" class="hero-logo" onerror="this.src='assets/images/ui/Zeus_symbol.png'">
+    <h1>Hades Build Guide</h1>
+    <p class="subtitle">O Compêndio das Melhores Composições</p>
+    <p class="description">Descubra as sinergias mais poderosas (duos, lendárias e combos) para dominar o submundo com todas as armas e aspectos. Siga as orientações para se tornar imbatível.</p>
+    <div class="hero-divider"></div>
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-number" id="stat-builds">0</div>
+        <div class="stat-label">Builds</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" id="stat-s-tier">0</div>
+        <div class="stat-label">Tier S</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" id="stat-weapons">0</div>
+        <div class="stat-label">Armas</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- FILTERS SECTION -->
+  <section class="filters-section">
+    <div class="filters-container">
+      <div class="filter-group">
+        <div class="filter-group-label">Arma</div>
+        <button class="filter-btn active" data-group="weapon" data-value="all">Todas</button>
+        <button class="filter-btn" data-group="weapon" data-value="blade">Espada</button>
+        <button class="filter-btn" data-group="weapon" data-value="spear">Lança</button>
+        <button class="filter-btn" data-group="weapon" data-value="shield">Escudo</button>
+        <button class="filter-btn" data-group="weapon" data-value="bow">Arco</button>
+        <button class="filter-btn" data-group="weapon" data-value="fists">Luvas</button>
+        <button class="filter-btn" data-group="weapon" data-value="rail">Canhão</button>
+      </div>
+      
+      <div class="filter-separator"></div>
+      
+      <div class="filter-group">
+        <div class="filter-group-label">Tier</div>
+        <button class="filter-btn active" data-group="tier" data-value="all">Todos</button>
+        <button class="filter-btn" data-group="tier" data-value="S">Tier S</button>
+        <button class="filter-btn" data-group="tier" data-value="A">Tier A</button>
+        <button class="filter-btn" data-group="tier" data-value="B">Tier B</button>
+        <button class="filter-btn" data-group="tier" data-value="C">Tier C</button>
+      </div>
+      
+      <div class="filter-separator"></div>
+      
+      <div class="filter-group">
+        <div class="filter-group-label">Dificuldade</div>
+        <button class="filter-btn active" data-group="difficulty" data-value="all">Todas</button>
+        <button class="filter-btn" data-group="difficulty" data-value="easy">Fácil</button>
+        <button class="filter-btn" data-group="difficulty" data-value="medium">Médio</button>
+        <button class="filter-btn" data-group="difficulty" data-value="hard">Difícil</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILDS GRID -->
+  <main class="builds-section">
+    <div class="builds-count" id="builds-count">Carregando builds...</div>
+    <div class="builds-grid" id="builds-grid">
+      <!-- JS injeta os cartões aqui -->
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-brand">HADES BUILD GUIDE</div>
+    <p>Projeto pessoal e interativo para explorar as melhores sinergias e cálculos do submundo.</p>
+    <p>Hades é uma marca registrada da Supergiant Games.</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
